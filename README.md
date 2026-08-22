@@ -1,6 +1,10 @@
-# Tim Huang profile — GitHub Pages
+# Tim Huang bilingual profile
 
-Upload the contents of this folder to the root of your GitHub Pages repository (or a subfolder if using a project site). `index.html` is the entry point.
+GitHub Pages-ready static one-pager.
 
+- `index.html` — English
+- `zh.html` — 简体中文
+- Language toggle appears in the top navigation.
+- Both pages share the same styling, profile image, and animations.
 
-Content was reorganized from https://www.mindx.us/tim-huang on August 21, 2026. Review insurance, fees, licenses, and telehealth jurisdictions before publishing because these can change.
+Upload the contents of this folder to the root of the GitHub Pages repository.
