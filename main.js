@@ -6,3 +6,11 @@ const tl=q('.timeline'),detail=q('.timeline-detail');qa('.milestone').forEach(m=
 q('.copy').onclick=async e=>{try{await navigator.clipboard.writeText(e.currentTarget.dataset.copy);q('.copy-status').textContent=document.documentElement.lang.startsWith('zh')?'已复制电话号码':'Phone number copied';setTimeout(()=>q('.copy-status').textContent='',1800)}catch{}};
 // ambient starfield
 const c=q('#stars'),ctx=c.getContext('2d');let pts=[];function resize(){let d=devicePixelRatio||1;c.width=innerWidth*d;c.height=innerHeight*d;c.style.width=innerWidth+'px';c.style.height=innerHeight+'px';ctx.setTransform(d,0,0,d,0,0);pts=Array.from({length:Math.min(150,Math.floor(innerWidth/8))},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.3+.2,a:Math.random()*.7+.15,v:Math.random()*.08+.02}))}function draw(){ctx.clearRect(0,0,innerWidth,innerHeight);for(const p of pts){p.y-=p.v;if(p.y<0)p.y=innerHeight;ctx.beginPath();ctx.fillStyle=`rgba(150,205,255,${p.a})`;ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill()}requestAnimationFrame(draw)}resize();addEventListener('resize',resize);if(!matchMedia('(prefers-reduced-motion: reduce)').matches)draw();
+
+// Signature V2 pointer-reactive lighting and hero depth
+const root=document.documentElement;
+addEventListener('pointermove',e=>{root.style.setProperty('--px',e.clientX+'px');root.style.setProperty('--py',e.clientY+'px');});
+const stage=q('.portrait-stage'),portrait=q('.portrait-wrap');
+if(stage&&portrait&&matchMedia('(pointer:fine)').matches){stage.addEventListener('pointermove',e=>{const r=stage.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;portrait.style.rotate=`${-y*3}deg ${x*5}deg`;});stage.addEventListener('pointerleave',()=>portrait.style.rotate='');}
+// animate numbers/years into view without changing factual values
+qa('.degree>b,.milestone>span').forEach((el,i)=>{el.animate([{opacity:.35,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:900,delay:200+i*110,fill:'both',easing:'cubic-bezier(.2,.7,.2,1)'});});

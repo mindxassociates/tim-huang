@@ -1,5 +1,5 @@
-# Tim Huang Signature Portfolio
-Static bilingual portfolio for GitHub Pages.
+# Tim Huang Signature Site
+Static bilingual personal site for GitHub Pages.
 
 - `index.html` — English
 - `zh.html` — 简体中文
