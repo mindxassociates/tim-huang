@@ -18,8 +18,8 @@ qa('.degree>b,.milestone>span').forEach((el,i)=>{el.animate([{opacity:.35,transf
 // Signature V3 — cinematic interaction layer
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 addEventListener('load',()=>{setTimeout(()=>{q('.preloader')?.classList.add('done');document.body.classList.add('page-ready')},420)});
-// split hero headline into hover-reactive characters without changing copy
-qa('.hero h1').forEach(h=>{[...h.childNodes].forEach(n=>{if(n.nodeType===3){const frag=document.createDocumentFragment();[...n.textContent].forEach(ch=>{if(ch===' '){frag.append(' ')}else{let s=document.createElement('span');s.className='char';s.textContent=ch;frag.append(s)}});n.replaceWith(frag)}else if(n.nodeName==='EM'){const txt=n.textContent;n.textContent='';[...txt].forEach(ch=>{let s=document.createElement('span');s.className='char';s.textContent=ch;n.append(s)})}})});
+// Split hero headline into hover-reactive characters while preserving real word spacing.
+qa('.hero h1').forEach(h=>{[...h.childNodes].forEach(n=>{if(n.nodeType===3){const frag=document.createDocumentFragment();[...n.textContent].forEach(ch=>{if(ch===' '){const sp=document.createElement('span');sp.className='word-space';sp.setAttribute('aria-hidden','true');sp.textContent=' ';frag.append(sp)}else{let s=document.createElement('span');s.className='char';s.textContent=ch;frag.append(s)}});n.replaceWith(frag)}else if(n.nodeName==='EM'){const txt=n.textContent;n.textContent='';[...txt].forEach(ch=>{if(ch===' '){const sp=document.createElement('span');sp.className='word-space';sp.setAttribute('aria-hidden','true');sp.textContent=' ';n.append(sp)}else{let s=document.createElement('span');s.className='char';s.textContent=ch;n.append(s)}})}})});
 qa('.hero h1 .char').forEach((ch,i)=>ch.style.setProperty('--i',i));
 if(!reduced&&matchMedia('(pointer:fine)').matches){
  const label=q('.cursor-label');

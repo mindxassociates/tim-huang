@@ -1,0 +1,62 @@
+/* Signature V4.5 — additional motion layer */
+.hero h1 .word-space{display:inline-block;width:.28em;min-width:.28em;white-space:pre}
+.hero h1 em .word-space{width:.3em;min-width:.3em}
+
+/* More dimensional headline motion without compromising legibility */
+.hero h1{perspective:900px}
+.hero h1 .char{transform-origin:50% 70%}
+.page-ready .hero h1 .char:nth-child(3n+1){animation-name:heroCharIn,letterDriftA}
+.page-ready .hero h1 .char:nth-child(3n+2){animation-name:heroCharIn,letterDriftB}
+.page-ready .hero h1 .char:nth-child(3n){animation-name:heroCharIn,letterDriftC}
+.page-ready .hero h1 .char{animation-duration:.72s,8s;animation-timing-function:cubic-bezier(.16,.8,.2,1),ease-in-out;animation-fill-mode:forwards,both;animation-iteration-count:1,infinite}
+@keyframes letterDriftA{0%,100%{translate:0 0}50%{translate:0 -1.5px}}
+@keyframes letterDriftB{0%,100%{translate:0 0}50%{translate:.7px 1px}}
+@keyframes letterDriftC{0%,100%{translate:0 0}50%{translate:-.7px -.8px}}
+
+/* Elegant animated underline/light ribbon on the highlighted phrase */
+.hero h1 em{position:relative;display:inline-block;isolation:isolate}
+.hero h1 em:after{content:"";position:absolute;left:1%;right:1%;bottom:-.09em;height:2px;background:linear-gradient(90deg,transparent,#d7a85f 18%,#7ac7ff 52%,#d7a85f 82%,transparent);transform-origin:left;animation:heroRibbon 4.8s ease-in-out infinite;filter:drop-shadow(0 0 7px rgba(122,199,255,.55));z-index:-1}
+@keyframes heroRibbon{0%,100%{transform:scaleX(.18);opacity:.28}45%,60%{transform:scaleX(1);opacity:.9}}
+
+/* Kicker gets a moving pinpoint instead of a static line */
+.kicker span{position:relative;overflow:visible}
+.kicker span:after{content:"";position:absolute;width:5px;height:5px;border-radius:50%;top:-2px;left:0;background:#f3cf8c;box-shadow:0 0 12px #d7a85f;animation:kickerDot 3.4s ease-in-out infinite}
+@keyframes kickerDot{0%,100%{left:0;opacity:.35}50%{left:31px;opacity:1}}
+
+/* Ambient moving light behind the hero copy */
+.hero-copy:before{content:"";position:absolute;z-index:-1;width:430px;height:430px;left:-140px;top:8%;border-radius:50%;background:radial-gradient(circle,rgba(93,183,255,.11),rgba(168,121,255,.04) 38%,transparent 70%);filter:blur(18px);animation:copyAura 9s ease-in-out infinite alternate;pointer-events:none}
+@keyframes copyAura{to{transform:translate(110px,70px) scale(1.16);opacity:.72}}
+
+/* Buttons get a traveling border pulse */
+.hero .btn{background-clip:padding-box}
+.hero .btn:after{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:conic-gradient(from var(--spin,0deg),transparent 0 65%,rgba(122,199,255,.75) 72%,rgba(215,168,95,.8) 78%,transparent 86%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.48;animation:borderOrbit 5s linear infinite;pointer-events:none}
+@property --spin{syntax:'<angle>';initial-value:0deg;inherits:false}
+@keyframes borderOrbit{to{--spin:360deg}}
+
+/* Portrait remains stable: only halo/orbits move */
+.portrait-wrap{animation:none!important}
+.portrait-glow{animation:portraitGlowV45 6.5s ease-in-out infinite!important}
+@keyframes portraitGlowV45{0%,100%{transform:scale(.94);opacity:.62}50%{transform:scale(1.09);opacity:1}}
+
+/* Section headings reveal a soft passing highlight */
+.section h2,.journey h2,.contact h2{position:relative}
+.section h2:after,.journey h2:after,.contact h2:after{content:"";display:block;width:0;height:1px;margin-top:18px;background:linear-gradient(90deg,#d7a85f,#5db7ff,transparent);box-shadow:0 0 12px rgba(93,183,255,.3);transition:width 1.2s cubic-bezier(.2,.75,.2,1)}
+[data-reveal].visible h2:after,.section-head.visible h2:after{width:min(220px,45%)}
+
+/* Cards feel alive at rest, but do not jitter */
+.feature-card:after{content:"";position:absolute;inset:auto -25% -65% -25%;height:55%;background:radial-gradient(ellipse,rgba(93,183,255,.13),transparent 66%);filter:blur(12px);animation:cardBreathe 5.5s ease-in-out infinite;pointer-events:none}
+.feature-card:nth-child(2):after{animation-delay:-1.3s}.feature-card:nth-child(3):after{animation-delay:-2.6s}.feature-card:nth-child(4):after{animation-delay:-3.9s}
+@keyframes cardBreathe{50%{transform:translateY(-20px) scaleX(1.1);opacity:.7}}
+
+/* Timeline line subtly flows forward */
+.timeline-line i{position:relative;overflow:hidden}
+.timeline-line i:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);transform:translateX(-120%);animation:timelineSweep 3.8s ease-in-out infinite}
+@keyframes timelineSweep{55%,100%{transform:translateX(140%)}}
+
+/* Contact card entrance and ambient edge light */
+.contact-panel{position:relative;overflow:hidden}
+.contact-panel:before{content:"";position:absolute;inset:-1px;border-radius:inherit;background:linear-gradient(120deg,transparent 20%,rgba(93,183,255,.22),transparent 42%,transparent 70%,rgba(215,168,95,.16),transparent 88%);background-size:250% 250%;animation:contactEdge 8s ease-in-out infinite;pointer-events:none;mix-blend-mode:screen}
+@keyframes contactEdge{50%{background-position:100% 100%}}
+
+@media(max-width:650px){.hero h1 .word-space{width:.24em;min-width:.24em}.hero-copy:before{width:300px;height:300px}.hero .btn:after{display:none}}
+@media(prefers-reduced-motion:reduce){.hero h1 .char,.hero h1 em:after,.kicker span:after,.hero-copy:before,.hero .btn:after,.portrait-glow,.feature-card:after,.timeline-line i:after,.contact-panel:before{animation:none!important}.hero h1 .char{opacity:1!important;filter:none!important;translate:none!important}}
