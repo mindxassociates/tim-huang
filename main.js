@@ -10,8 +10,7 @@ const c=q('#stars'),ctx=c.getContext('2d');let pts=[];function resize(){let d=de
 // Signature V2 pointer-reactive lighting and hero depth
 const root=document.documentElement;
 addEventListener('pointermove',e=>{root.style.setProperty('--px',e.clientX+'px');root.style.setProperty('--py',e.clientY+'px');});
-const stage=q('.portrait-stage'),portrait=q('.portrait-wrap');
-if(stage&&portrait&&matchMedia('(pointer:fine)').matches){stage.addEventListener('pointermove',e=>{const r=stage.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;portrait.style.rotate=`${-y*3}deg ${x*5}deg`;});stage.addEventListener('pointerleave',()=>portrait.style.rotate='');}
+// Portrait intentionally remains stable; ambient motion is handled in CSS.
 // animate numbers/years into view without changing factual values
 qa('.degree>b,.milestone>span').forEach((el,i)=>{el.animate([{opacity:.35,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:900,delay:200+i*110,fill:'both',easing:'cubic-bezier(.2,.7,.2,1)'});});
 
@@ -36,3 +35,21 @@ let ticking=false;function cinematic(){ticking=false;const y=scrollY,h=innerHeig
  const tl=q('.timeline');if(tl){const r=tl.getBoundingClientRect(),p=Math.max(0,Math.min(1,(h*.75-r.top)/(r.height*.85)));q('.timeline-line i').style.width=(p*100)+'%'}
 }
 addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(cinematic);ticking=true}},{passive:true});cinematic();
+
+
+// Signature V4 — cursor-origin spotlight + micro-sparks on service cards
+if(matchMedia('(pointer:fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+  qa('.feature-card').forEach(card=>{
+    let last=0;
+    card.addEventListener('pointerenter',()=>card.classList.add('spark'));
+    card.addEventListener('pointerleave',()=>card.classList.remove('spark'));
+    card.addEventListener('pointermove',e=>{
+      const r=card.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;
+      card.style.setProperty('--sx',x+'px'); card.style.setProperty('--sy',y+'px');
+      const now=performance.now(); if(now-last<58)return; last=now;
+      const p=document.createElement('i'); p.className='spark-particle'; p.style.left=x+'px'; p.style.top=y+'px';
+      const a=Math.random()*Math.PI*2,d=12+Math.random()*28;p.style.setProperty('--dx',Math.cos(a)*d+'px');p.style.setProperty('--dy',Math.sin(a)*d+'px');
+      card.appendChild(p);setTimeout(()=>p.remove(),700);
+    });
+  });
+}

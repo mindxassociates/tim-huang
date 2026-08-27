@@ -55,3 +55,29 @@ body.page-ready .hero-copy>*{animation:heroIn .9s both cubic-bezier(.2,.75,.2,1)
 @media(max-width:1050px){.hero-coordinates,.portrait-index{display:none}.interlude{height:55vh;min-height:430px}.interlude-word{font-size:20vw}.scanline{width:75vw}}
 @media(max-width:650px){.interlude{height:420px;min-height:0}.interlude-word{font-size:22vw;line-height:.9}.hero-beam{opacity:.25}.scanline{display:none}}
 @media(prefers-reduced-motion:reduce){.preloader{display:none}.hero-beam,.scanline,.portrait-wrap:after,.interlude-word{animation:none!important}.interlude-word{transform:none!important}}
+
+/* Signature V4 — elegant interaction refinements */
+.portrait-wrap{animation:portraitBreathe 8s cubic-bezier(.45,0,.55,1) infinite;transition:box-shadow .7s ease,filter .7s ease;transform:none!important;rotate:none!important}
+.portrait-wrap:hover{box-shadow:0 34px 95px #000,0 0 105px rgba(93,183,255,.28);filter:brightness(1.035)}
+.portrait-wrap img{transition:transform 1.2s cubic-bezier(.2,.75,.2,1),filter 1.2s ease}
+.portrait-wrap:hover img{transform:scale(1.018);filter:saturate(.94) contrast(1.035)}
+@keyframes portraitBreathe{0%,100%{translate:0 0}50%{translate:0 -7px}}
+.signature{white-space:nowrap;text-shadow:0 0 24px rgba(215,168,95,.18)}
+
+.feature-card{--sx:50%;--sy:50%;--spark:0;isolation:isolate}
+.feature-card:before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:0;background:radial-gradient(circle 105px at var(--sx) var(--sy),rgba(255,255,255,.20) 0,rgba(93,183,255,.16) 12%,rgba(77,226,223,.08) 31%,transparent 68%);opacity:var(--spark);transition:opacity .24s ease;mix-blend-mode:screen}
+.feature-card:after{content:'';position:absolute;width:5px;height:5px;left:var(--sx);top:var(--sy);border-radius:50%;pointer-events:none;z-index:3;background:#fff;opacity:var(--spark);transform:translate(-50%,-50%);box-shadow:0 0 7px 2px #fff,0 0 18px 7px rgba(93,183,255,.85),18px -10px 0 -1px rgba(215,168,95,.75),-14px 13px 0 -1px rgba(77,226,223,.75),9px 18px 0 -2px rgba(255,255,255,.8);transition:opacity .18s ease}
+.feature-card>*{position:relative;z-index:2}.feature-card.spark{--spark:1}
+.feature-card.spark .icon{filter:drop-shadow(0 0 14px currentColor);transform:translateY(-3px) scale(1.04)}
+.feature-card .icon{transition:transform .6s cubic-bezier(.2,.8,.2,1),filter .6s ease}
+.feature-card.spark{border-color:rgba(125,205,255,.55);box-shadow:0 24px 70px rgba(0,0,0,.38),0 0 38px rgba(93,183,255,.13)}
+
+.feature-card .spark-particle{position:absolute;z-index:4;width:3px;height:3px;border-radius:50%;pointer-events:none;background:#fff;box-shadow:0 0 8px rgba(93,183,255,.9);animation:cursorSpark .65s cubic-bezier(.15,.7,.2,1) forwards}
+@keyframes cursorSpark{from{opacity:1;transform:translate(-50%,-50%) scale(1)}to{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(.15)}}
+
+.section-head h2,.intro h2,.journey-intro h2,.contact h2{background:linear-gradient(100deg,#f4f6f8 0%,#f4f6f8 44%,#b8ddff 50%,#f4f6f8 56%,#f4f6f8 100%);background-size:240% auto;background-position:100% center;-webkit-background-clip:text;background-clip:text;color:transparent;animation:headingLustre 11s ease-in-out infinite}
+.section-head h2 em,.intro h2 em,.journey-intro h2 em,.contact h2 em{-webkit-text-fill-color:#e1b56e}
+@keyframes headingLustre{0%,72%,100%{background-position:100% center}84%{background-position:0 center}}
+.milestone{overflow:hidden}.milestone:after{content:'';position:absolute;inset:-60% -30%;background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.12) 49%,transparent 56%);transform:translateX(-70%) rotate(8deg);transition:transform .9s ease;pointer-events:none}.milestone:hover:after,.milestone.active:after{transform:translateX(70%) rotate(8deg)}
+.contact-panel{position:relative;overflow:hidden}.contact-panel:after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle 160px at var(--cx,50%) var(--cy,50%),rgba(93,183,255,.13),transparent 72%);opacity:.8}
+@media(prefers-reduced-motion:reduce){.portrait-wrap,.section-head h2,.intro h2,.journey-intro h2,.contact h2{animation:none!important}.feature-card .spark-particle{display:none}}
