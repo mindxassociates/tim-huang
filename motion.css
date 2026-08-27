@@ -60,3 +60,9 @@
 
 @media(max-width:650px){.hero h1 .word-space{width:.24em;min-width:.24em}.hero-copy:before{width:300px;height:300px}.hero .btn:after{display:none}}
 @media(prefers-reduced-motion:reduce){.hero h1 .char,.hero h1 em:after,.kicker span:after,.hero-copy:before,.hero .btn:after,.portrait-glow,.feature-card:after,.timeline-line i:after,.contact-panel:before{animation:none!important}.hero h1 .char{opacity:1!important;filter:none!important;translate:none!important}}
+
+/* V4.6: preserve natural headline typography when characters are split for motion. */
+.hero h1 .char{letter-spacing:0!important}
+.hero h1 .word-space{width:.36em!important;min-width:.36em!important}
+.hero h1 em .word-space{width:.38em!important;min-width:.38em!important}
+@media(max-width:650px){.hero h1 .word-space{width:.34em!important;min-width:.34em!important}.hero h1 em .word-space{width:.36em!important;min-width:.36em!important}}
