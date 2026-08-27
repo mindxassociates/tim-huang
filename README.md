@@ -1,10 +1,11 @@
-# Tim Huang Signature Site
-Static bilingual personal site for GitHub Pages.
+# Tim Huang Signature Page — V3 Max
+
+Static bilingual GitHub Pages site.
 
 - `index.html` — English
 - `zh.html` — 简体中文
-- `style.css` — design system and responsive layout
-- `main.js` — interactive motion, timeline, cursor, parallax/tilt, copy feedback, starfield
-- `assets/tim-huang-profile.jpg` — profile portrait
+- `style.css` — cinematic visual system
+- `main.js` — interactive motion layer
+- `assets/tim-huang-profile.jpg` — profile photo
 
-Upload all files at repository root and deploy GitHub Pages from the root of the main branch.
+No build step required.
