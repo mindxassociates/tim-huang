@@ -1,11 +1,10 @@
-# Tim Huang Portfolio — Interactive Bilingual Edition
-
-Static GitHub Pages portfolio.
+# Tim Huang Signature Portfolio
+Static bilingual portfolio for GitHub Pages.
 
 - `index.html` — English
 - `zh.html` — 简体中文
-- `style.css` — canonical mellow dark-blue design + quiet interaction layer
-- `main.js` — scroll progress, active navigation, subtle parallax, magnetic CTAs, card tilt/glow, rotating roles, copy-phone feedback
+- `style.css` — design system and responsive layout
+- `main.js` — interactive motion, timeline, cursor, parallax/tilt, copy feedback, starfield
 - `assets/tim-huang-profile.jpg` — profile portrait
 
-No build step or dependencies required. Motion respects `prefers-reduced-motion`.
+Upload all files at repository root and deploy GitHub Pages from the root of the main branch.
