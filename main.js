@@ -18,14 +18,11 @@ qa('.degree>b,.milestone>span').forEach((el,i)=>{el.animate([{opacity:.35,transf
 // Signature V3 — cinematic interaction layer
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 addEventListener('load',()=>{setTimeout(()=>{q('.preloader')?.classList.add('done');document.body.classList.add('page-ready')},420)});
-// Split hero headline into hover-reactive characters while preserving real word spacing.
-qa('.hero h1').forEach(h=>{[...h.childNodes].forEach(n=>{if(n.nodeType===3){const frag=document.createDocumentFragment();[...n.textContent].forEach(ch=>{if(ch===' '){const sp=document.createElement('span');sp.className='word-space';sp.setAttribute('aria-hidden','true');sp.textContent=' ';frag.append(sp)}else{let s=document.createElement('span');s.className='char';s.textContent=ch;frag.append(s)}});n.replaceWith(frag)}else if(n.nodeName==='EM'){const txt=n.textContent;n.textContent='';[...txt].forEach(ch=>{if(ch===' '){const sp=document.createElement('span');sp.className='word-space';sp.setAttribute('aria-hidden','true');sp.textContent=' ';n.append(sp)}else{let s=document.createElement('span');s.className='char';s.textContent=ch;n.append(s)}})}})});
-qa('.hero h1 .char').forEach((ch,i)=>ch.style.setProperty('--i',i));
+// Hero typography is intentionally animated at line/word level, not character level.
+// This preserves the font's native kerning and real whitespace in “Meaningful Change.”
 if(!reduced&&matchMedia('(pointer:fine)').matches){
  const label=q('.cursor-label');
- addEventListener('pointermove',e=>{label.style.left=e.clientX+'px';label.style.top=e.clientY+'px';
-   qa('.hero h1 .char').forEach(ch=>{const r=ch.getBoundingClientRect(),dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2),d=Math.hypot(dx,dy);if(d<130){const f=(130-d)/130;ch.style.transform=`translate(${dx*-0.035*f}px,${dy*-0.06*f}px) translateZ(${24*f}px)`;ch.style.textShadow=`0 0 ${26*f}px rgba(93,183,255,${.55*f})`}else{ch.style.transform='';ch.style.textShadow=''}});
- });
+ addEventListener('pointermove',e=>{label.style.left=e.clientX+'px';label.style.top=e.clientY+'px';});
  qa('.feature-card,.milestone,.degree,.contact-panel').forEach(el=>{el.addEventListener('mouseenter',()=>label.classList.add('show'));el.addEventListener('mouseleave',()=>label.classList.remove('show'))});
  q('.contact-panel')?.addEventListener('pointermove',e=>{let r=e.currentTarget.getBoundingClientRect();e.currentTarget.style.setProperty('--cx',e.clientX-r.left+'px');e.currentTarget.style.setProperty('--cy',e.clientY-r.top+'px')});
 }

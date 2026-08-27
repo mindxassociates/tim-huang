@@ -66,3 +66,17 @@
 .hero h1 .word-space{width:.36em!important;min-width:.36em!important}
 .hero h1 em .word-space{width:.38em!important;min-width:.38em!important}
 @media(max-width:650px){.hero h1 .word-space{width:.34em!important;min-width:.34em!important}.hero h1 em .word-space{width:.36em!important;min-width:.36em!important}}
+
+
+/* V4.7 — line/word-level hero motion. Native kerning and whitespace are preserved. */
+.hero h1{letter-spacing:-.035em}
+.hero h1 .hero-line{display:inline-block;opacity:0;transform:translateY(26px) scale(.985);filter:blur(8px);will-change:transform,opacity,filter}
+.page-ready .hero h1 .hero-line{animation:heroLineReveal .9s cubic-bezier(.16,.8,.2,1) forwards}
+.page-ready .hero h1 .hero-line:nth-of-type(1){animation-delay:.38s}
+.page-ready .hero h1 .hero-line:nth-of-type(2){animation-delay:.56s}
+.page-ready .hero h1 .hero-accent{animation-delay:.74s}
+.hero h1 .hero-word{display:inline-block;letter-spacing:inherit}
+.hero h1 .hero-word + .hero-word{margin-left:.22em}
+@keyframes heroLineReveal{0%{opacity:0;transform:translateY(26px) scale(.985);filter:blur(8px)}70%{opacity:1;transform:translateY(-2px) scale(1);filter:blur(0)}100%{opacity:1;transform:none;filter:blur(0)}}
+@media(max-width:650px){.hero h1 .hero-word + .hero-word{margin-left:.20em}}
+@media(prefers-reduced-motion:reduce){.hero h1 .hero-line{opacity:1!important;transform:none!important;filter:none!important;animation:none!important}}
