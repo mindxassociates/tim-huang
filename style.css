@@ -117,3 +117,41 @@ body.page-ready .hero-copy>*{animation:heroIn .9s both cubic-bezier(.2,.75,.2,1)
 
 @media(max-width:650px){.portrait-stage::after{display:none}.portrait-stage::before{width:88%;height:72%}}
 @media(prefers-reduced-motion:reduce){.portrait-stage::before,.portrait-stage::after,.orbit:after,.nav .brand .monogram,.section-tag::after,.journey-intro>p:first-child::after,.section-head>p::after,.expertise::after,.manifesto::after{animation:none!important}}
+
+
+/* V4.4 — remove all head-crossing beams, richer hero typography, compact contact card */
+.hero-beam,.beam-a,.beam-b,.beam-c,.scanline{display:none!important;animation:none!important}
+
+/* top-of-page text choreography */
+.hero-copy{isolation:isolate}
+.kicker{position:relative;overflow:visible;animation:kickerFloat 5.8s ease-in-out infinite}
+.kicker::after{content:'';position:absolute;left:48px;bottom:-10px;width:0;height:1px;background:linear-gradient(90deg,var(--gold),rgba(93,183,255,.75),transparent);box-shadow:0 0 10px rgba(215,168,95,.35);animation:kickerTrace 5.8s ease-in-out infinite}
+@keyframes kickerFloat{0%,100%{transform:translateY(0);letter-spacing:.18em}50%{transform:translateY(-3px);letter-spacing:.205em}}
+@keyframes kickerTrace{0%,100%{width:0;opacity:0}20%{opacity:.9}48%,70%{width:210px;opacity:.75}90%{width:40px;opacity:.15}}
+
+.hero h1{position:relative;filter:drop-shadow(0 0 0 rgba(93,183,255,0))}
+.page-ready .hero h1{animation:heroTitleAura 7.5s ease-in-out 1.2s infinite}
+@keyframes heroTitleAura{0%,100%{filter:drop-shadow(0 0 0 rgba(93,183,255,0))}50%{filter:drop-shadow(0 0 18px rgba(93,183,255,.10))}}
+.hero h1 .char{opacity:0;filter:blur(8px);animation:heroCharIn .72s cubic-bezier(.16,.8,.2,1) forwards;animation-delay:calc(.42s + var(--i,0) * 18ms)}
+@keyframes heroCharIn{0%{opacity:0;filter:blur(8px);translate:0 18px}65%{opacity:1;filter:blur(0);translate:0 -2px}100%{opacity:1;filter:blur(0);translate:0 0}}
+.hero h1 em{position:relative;display:inline-block;text-shadow:0 0 26px rgba(215,168,95,.10);animation:goldPhrase 6.5s ease-in-out 1.8s infinite}
+@keyframes goldPhrase{0%,100%{text-shadow:0 0 18px rgba(215,168,95,.08)}50%{text-shadow:0 0 30px rgba(215,168,95,.25),0 0 65px rgba(93,183,255,.07)}}
+.hero-copy>p{opacity:0;transform:translateY(16px);filter:blur(5px)}
+.page-ready .hero-copy>p{animation:heroBodyIn 1s cubic-bezier(.2,.75,.2,1) .95s forwards}
+@keyframes heroBodyIn{to{opacity:1;transform:none;filter:none}}
+.hero .actions{opacity:0;transform:translateY(14px)}
+.page-ready .hero .actions{animation:heroActionsIn .9s cubic-bezier(.2,.75,.2,1) 1.25s forwards}
+@keyframes heroActionsIn{to{opacity:1;transform:none}}
+.hero .btn.primary{animation:primaryBreath 4.8s ease-in-out 2.2s infinite}
+@keyframes primaryBreath{0%,100%{box-shadow:0 0 28px rgba(55,151,240,.24)}50%{box-shadow:0 0 38px rgba(55,151,240,.38),0 0 70px rgba(93,183,255,.08)}}
+
+/* contact panel should hug its content, not fill the grid column */
+.contact{grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr)}
+.contact-panel{justify-self:start;align-self:center;width:fit-content;min-width:340px;max-width:100%;padding:32px 34px;gap:14px}
+.contact-panel .phone{white-space:nowrap}
+.contact-panel>a:not(.phone){width:max-content;max-width:100%}
+.contact-panel .copy{margin-top:0}
+
+@media(max-width:1050px){.contact-panel{justify-self:start;width:fit-content}}
+@media(max-width:650px){.contact-panel{width:100%;min-width:0;justify-self:stretch}.contact-panel .phone{white-space:normal}}
+@media(prefers-reduced-motion:reduce){.kicker,.kicker::after,.hero h1,.hero h1 .char,.hero h1 em,.hero-copy>p,.hero .actions,.hero .btn.primary{animation:none!important;opacity:1!important;transform:none!important;translate:none!important;filter:none!important}}
