@@ -53,3 +53,11 @@ if(matchMedia('(pointer:fine)').matches && !matchMedia('(prefers-reduced-motion:
     });
   });
 }
+
+
+// V4.3 — elegant pointer glints without moving the portrait itself
+if(matchMedia('(pointer:fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+  qa('.glass-card,.degree').forEach(el=>{
+    el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();el.style.setProperty('--gx',((e.clientX-r.left)/r.width*100)+'%');el.style.setProperty('--gy',((e.clientY-r.top)/r.height*100)+'%')});
+  });
+}

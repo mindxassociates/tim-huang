@@ -84,3 +84,36 @@ body.page-ready .hero-copy>*{animation:heroIn .9s both cubic-bezier(.2,.75,.2,1)
 
 /* V4.1 clarity refinements */
 .contact-panel .phone{margin-bottom:-8px}.contact-panel .copy{margin-top:-4px}.interlude-word.outline{font-weight:600;letter-spacing:-.055em}
+
+
+/* V4.3 — elegant motion refinements; portrait scan line intentionally removed */
+.scanline{display:none!important}
+.portrait-stage::before,.portrait-stage::after{content:'';position:absolute;pointer-events:none;z-index:2;border-radius:50%;opacity:.55}
+.portrait-stage::before{width:72%;height:72%;border:1px solid rgba(93,183,255,.12);box-shadow:inset 0 0 55px rgba(93,183,255,.035),0 0 70px rgba(93,183,255,.035);animation:haloDrift 12s ease-in-out infinite}
+.portrait-stage::after{width:9px;height:9px;background:#f2cf93;box-shadow:0 0 10px #f2cf93,0 0 28px rgba(215,168,95,.65);animation:haloSatellite 9s cubic-bezier(.45,0,.55,1) infinite}
+@keyframes haloDrift{0%,100%{transform:scale(.96);opacity:.32}50%{transform:scale(1.035);opacity:.7}}
+@keyframes haloSatellite{0%{transform:translate(-245px,-115px) scale(.55);opacity:0}12%{opacity:1}50%{transform:translate(245px,95px) scale(1);opacity:.85}88%{opacity:1}100%{transform:translate(-245px,-115px) scale(.55);opacity:0}}
+
+.orbit{filter:drop-shadow(0 0 6px rgba(93,183,255,.12))}.o2{filter:drop-shadow(0 0 7px rgba(215,168,95,.12))}
+.orbit:after{animation:orbitStar 2.8s ease-in-out infinite}
+@keyframes orbitStar{0%,100%{transform:scale(.65);opacity:.55}50%{transform:scale(1.35);opacity:1}}
+
+.nav .brand .monogram{animation:monogramGlow 7s ease-in-out infinite}
+@keyframes monogramGlow{0%,100%{text-shadow:0 0 0 rgba(215,168,95,0)}50%{text-shadow:0 0 24px rgba(215,168,95,.38)}}
+
+.glass-card,.degree{position:relative;overflow:hidden}.glass-card::after,.degree::after{content:'';position:absolute;pointer-events:none;inset:-40% -70%;background:linear-gradient(105deg,transparent 42%,rgba(185,220,255,.075) 49%,rgba(255,255,255,.11) 50%,transparent 58%);transform:translateX(-55%);opacity:0;transition:opacity .5s ease,transform 1.15s cubic-bezier(.2,.75,.2,1)}
+.glass-card:hover::after,.degree:hover::after{transform:translateX(55%);opacity:1}
+
+.section-tag,.journey-intro>p:first-child,.section-head>p{position:relative;display:inline-block}.section-tag::after,.journey-intro>p:first-child::after,.section-head>p::after{content:'';position:absolute;left:0;bottom:-8px;width:24px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);animation:tagBreath 4s ease-in-out infinite}
+.section-head>p::after{left:50%;transform:translateX(-50%)}
+@keyframes tagBreath{0%,100%{width:20px;opacity:.45}50%{width:48px;opacity:1}}
+
+.contact-panel{transition:transform .6s cubic-bezier(.2,.75,.2,1),border-color .6s ease,box-shadow .6s ease}.contact-panel:hover{transform:translateY(-5px);border-color:rgba(93,183,255,.38);box-shadow:0 30px 90px rgba(0,0,0,.28),0 0 45px rgba(93,183,255,.07)}
+
+/* a slow travelling glint across major section borders */
+.expertise::after,.manifesto::after{content:'';position:absolute;left:-20%;top:-1px;width:18%;height:1px;background:linear-gradient(90deg,transparent,#d8efff,var(--blue),transparent);filter:drop-shadow(0 0 7px var(--blue));animation:borderComet 10s ease-in-out infinite;pointer-events:none}
+.manifesto::after{top:auto;bottom:-1px;animation-delay:-4s}
+@keyframes borderComet{0%,18%{left:-20%;opacity:0}24%{opacity:.85}58%{left:102%;opacity:.6}64%,100%{left:102%;opacity:0}}
+
+@media(max-width:650px){.portrait-stage::after{display:none}.portrait-stage::before{width:88%;height:72%}}
+@media(prefers-reduced-motion:reduce){.portrait-stage::before,.portrait-stage::after,.orbit:after,.nav .brand .monogram,.section-tag::after,.journey-intro>p:first-child::after,.section-head>p::after,.expertise::after,.manifesto::after{animation:none!important}}
